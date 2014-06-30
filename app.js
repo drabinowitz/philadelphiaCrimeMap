@@ -4,9 +4,17 @@ $(document).ready(function(){
 
 		var mapOptions = {
 
-		  center: new google.maps.LatLng(-34.397, 150.644),
+		  center: new google.maps.LatLng(39.9578866,-75.1698302),
 
-		  zoom: 8
+		  zoom: 13,
+
+		  minZoom: 13,
+
+		  draggable: false,
+
+		  overviewMapControl: false,
+
+		  panControl: false
 
 		};
 
@@ -19,16 +27,6 @@ $(document).ready(function(){
 		  map: map,
 
 		  title: 'Click to zoom'
-
-		});
-
-		google.maps.event.addListener(map,'center_changed',function(){
-
-			window.setTimeout(function(){
-
-				map.panTo(marker.getPosition());
-
-			},3000);
 
 		});
 
@@ -55,5 +53,22 @@ $(document).ready(function(){
 		});
 
 	})();
+
+	var result = $.ajax({
+		url: "https://maps.googleapis.com/maps/api/place/textsearch/json",
+		data: {
+
+			query:"Philadelphia",
+
+			key:"AIzaSyCeONSkk-jDozekhXZffdnTgbqOyVe7KH0"
+
+		},
+		dataType: "jsonp",
+		type: "GET"
+		}).done(function(result){
+			debugger;
+			alert(result.results.length);
+
+		});
 
 });

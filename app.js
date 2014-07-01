@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 				spatialRel: 'esriSpatialRelContains',
 
-				outFields: '*',
+				outFields: 'UCR_GENERAL,HOUR,POINT_X,POINT_Y',
 
 				inSR: 4326,
 

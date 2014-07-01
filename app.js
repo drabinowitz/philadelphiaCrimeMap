@@ -22,33 +22,39 @@ $(document).ready(function(){
 
 		var allowedBounds;
 
-		var marker = new google.maps.Marker({
-
-		  position: map.getCenter(),
-
-		  map: map,
-
-		  title: 'Click to zoom'
-
-		});
-
 		google.maps.event.addListenerOnce(map, 'idle', function() {
-         allowedBounds = map.getBounds();
-      });
-
-		google.maps.event.addListener(marker,'click',function(){
-
-			map.setZoom(8);
-
-			map.setCenter(marker.getPosition());
-
-		});
+        
+        	allowedBounds = map.getBounds();
+    	
+    	});
 
 		google.maps.event.addListener(map,'click',function(event){
 
+			$('.overlay').show();
+
+			var coordinates = drawPerimeter(event.latLng.lat(),event.latLng.lng(),9,0.002);
+
+			var esriCoordinates = '{"rings":[[';
+
+			for (var i = 0; i < coordinates.length; i++){
+
+				if (i){
+
+					esriCoordinates += ',';
+
+				}
+
+				esriCoordinates += '[' + coordinates[i][1] + ',' + coordinates[i][0] + ']';
+
+			}
+
+			esriCoordinates += ']],"spatialReference":{"wkid":4326}}';
+
+			/*'{"rings":[[[-75.16505599021912,39.95365185651431],[-75.16235232353209,39.95329409673581],[-75.16274392604828,39.951423023730335],[-75.16437470912933,39.95170677215989],[-75.16496479511261,39.951805466989896],[-75.16525983810425,39.95202341756838],[-75.16528129577637,39.95224136745237],[-75.16524910926819,39.95252922472533],[-75.16513645648956,39.9529856816317],[-75.16510963439941,39.95331876988407],[-75.16505599021912,39.95365185651431]]],"spatialReference":{"wkid":4326}}'*/
+
 			var request = {
 
-				geometry: '{"rings":[[[-75.16505599021912,39.95365185651431],[-75.16235232353209,39.95329409673581],[-75.16274392604828,39.951423023730335],[-75.16437470912933,39.95170677215989],[-75.16496479511261,39.951805466989896],[-75.16525983810425,39.95202341756838],[-75.16528129577637,39.95224136745237],[-75.16524910926819,39.95252922472533],[-75.16513645648956,39.9529856816317],[-75.16510963439941,39.95331876988407],[-75.16505599021912,39.95365185651431]]],"spatialReference":{"wkid":4326}}',
+				geometry: esriCoordinates,
 
 				geometryType: 'esriGeometryPolygon',
 
@@ -78,21 +84,82 @@ $(document).ready(function(){
 
 			})
  
-			.done(function(result){debugger;});
+			.done(function(result){
 
-			/*http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query?geometry={"rings":[[[-75.16505599021912,39.95365185651431],[-75.16235232353209,39.95329409673581],[-75.16274392604828,39.951423023730335],[-75.16437470912933,39.95170677215989],[-75.16496479511261,39.951805466989896],[-75.16525983810425,39.95202341756838],[-75.16528129577637,39.95224136745237],[-75.16524910926819,39.95252922472533],[-75.16513645648956,39.9529856816317],[-75.16510963439941,39.95331876988407],[-75.16505599021912,39.95365185651431]]],"spatialReference":{"wkid":4326}}&geometryType=esriGeometryPolygon&spatialRel=esriSpatialRelContains&outFields=*&inSR=4326&outSR=4326&f=pjson&pretty=true*/
+				$('.overlay').hide();
 
-			var newMarker = new google.maps.Marker({
+				$.each(result.features,function(index,value){
 
-				position: event.latLng,
+					var newMarker = new google.maps.Marker({
 
-				map: map,
+						position: new google.maps.LatLng(value.attributes.POINT_Y,value.attributes.POINT_X),
 
-				title: 'Click to zoom'
+						map: map,
+
+						title: 'Click to zoom'
+
+					});
+
+					locationListener(newMarker);
+
+				});
+
+			})
+
+			.fail(function(result){
+
+				$('.overlay').hide();
 
 			});
 
 		});
+
+		function drawPerimeter( lat,lng,accuracy,scale ){
+
+			if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
+
+				var coordinates = []
+
+				for(var i = 0; i <= accuracy;i++){
+
+					coordinates.push([
+
+						lat + scale * Math.cos( 2 * Math.PI * i / accuracy ),
+
+						lng + scale * Math.sin( 2 * Math.PI * i / accuracy )
+
+					]);
+
+				}
+
+				return coordinates;
+
+			} else {
+
+				console.log('invalid accuracy value of ' + accuracy + ' accuracy must be an integer value of 3 or greater');
+
+			}
+
+		};
+
+		function locationListener(marker) {
+
+			var local = marker.getPosition();
+
+			var infowindow = new google.maps.InfoWindow({
+
+				content: local.lat() + " " + local.lng()
+
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+
+				infowindow.open(marker.get('map'), marker);
+
+			});
+
+		}
+
 
 		google.maps.event.addListener(map,'center_changed',function() { checkBounds(); });
 

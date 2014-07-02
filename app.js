@@ -56,17 +56,19 @@ $(document).ready(function(){
 
 				geometry: esriCoordinates,
 
-				geometryType: 'esriGeometryPolygon',
+				geometryType: "esriGeometryPolygon",
 
-				spatialRel: 'esriSpatialRelContains',
+				spatialRel: "esriSpatialRelContains",
 
-				outFields: 'UCR_GENERAL,HOUR,POINT_X,POINT_Y',
+				where: "DISPATCH_DATE>'2011-01-01'",
+
+				outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
 
 				inSR: 4326,
 
 				outSR: 4326,
 
-				f: 'pjson',
+				f: "pjson",
 
 				pretty: true
 

@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 		spatialRel: "esriSpatialRelContains",
 
-		where: "DISPATCH_DATE>'" + (new Date().getFullYear()-2).toString() + "-01-01'",
+		where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
 
 		outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
 

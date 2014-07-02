@@ -122,9 +122,37 @@ function initialize( mapOptions ) {
 
 					});
 
+					map.panTo( event.latLng );
+
 					map.setZoom( 17 );
 
-					map.panTo( event.latLng );
+					var perimeterCoordinates = [];
+
+					$.each(coordinates,function(index,value){
+
+						perimeterCoordinates.push( new google.maps.LatLng(value[0],value[1]) )
+
+					})
+
+					perimeter = new google.maps.Polygon({
+
+						paths: perimeterCoordinates,
+
+						strokeColor: '#FF0000',
+
+						strokeOpacity: 0.8,
+
+						strokeWeight: 2,
+
+						fillColor: '#FF0000',
+
+						fillOpacity: 0.35
+
+					});
+
+					perimeter.setMap(map);
+
+					debugger;
 
 				});
 

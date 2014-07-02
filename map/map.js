@@ -1,5 +1,29 @@
 function initialize( mapOptions ) {
 
+	/*function fluidZoom( zoomLevel,stepSize,stepSpeed ){
+
+		var zoomStep = map.getZoom();
+
+		if( zoomStep >= zoomLevel - stepSize ){
+
+			map.setZoom(zoomLevel);
+
+		} else {
+
+			zoomStep += stepSize - ( zoomLevel - zoomStep ) % stepSize;
+
+			map.setZoom(zoomStep);
+
+			setTimeout( function(){
+
+				fluidZoom( zoomLevel,stepSize,stepSpeed );
+
+			}, stepSpeed );
+
+		}
+
+	}*/
+
 	function drawPerimeter( lat,lng,accuracy,scale ){
 
 		if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
@@ -26,7 +50,7 @@ function initialize( mapOptions ) {
 
 		}
 
-	};
+	}
 
 	var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
@@ -97,6 +121,10 @@ function initialize( mapOptions ) {
 						});
 
 					});
+
+					map.setZoom( 17 );
+
+					map.panTo( event.latLng );
 
 				});
 

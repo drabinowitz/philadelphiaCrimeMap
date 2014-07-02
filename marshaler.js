@@ -1,12 +1,14 @@
 $(document).ready(function(){
 
+	var zoomLevel = 13;
+
 	var mapOptions = {
 
 		center: new google.maps.LatLng(39.9578866,-75.1698302),
 
-		zoom: 13,
+		zoom: zoomLevel,
 
-		minZoom: 13,
+		minZoom: zoomLevel,
 
 		draggable: true,
 

@@ -34,7 +34,9 @@ $(document).ready(function(){
 
 			var coordinates = drawPerimeter(event.latLng.lat(),event.latLng.lng(),9,0.002);
 
-			var esriCoordinates = '{"rings":[[';
+			var esriCoordinates = buildEsriCoordinates( coordinates );
+
+/*			var esriCoordinates = '{"rings":[[';
 
 			for (var i = 0; i < coordinates.length; i++){
 
@@ -48,7 +50,7 @@ $(document).ready(function(){
 
 			}
 
-			esriCoordinates += ']],"spatialReference":{"wkid":4326}}';
+			esriCoordinates += ']],"spatialReference":{"wkid":4326}}';*/
 
 			/*'{"rings":[[[-75.16505599021912,39.95365185651431],[-75.16235232353209,39.95329409673581],[-75.16274392604828,39.951423023730335],[-75.16437470912933,39.95170677215989],[-75.16496479511261,39.951805466989896],[-75.16525983810425,39.95202341756838],[-75.16528129577637,39.95224136745237],[-75.16524910926819,39.95252922472533],[-75.16513645648956,39.9529856816317],[-75.16510963439941,39.95331876988407],[-75.16505599021912,39.95365185651431]]],"spatialReference":{"wkid":4326}}'*/
 
@@ -143,6 +145,28 @@ $(document).ready(function(){
 			}
 
 		};
+
+		function buildEsriCoordinates( coordinates ){
+
+			var esriCoordinates = '{"rings":[[';
+
+			for (var i = 0; i < coordinates.length; i++){
+
+				if (i){
+
+					esriCoordinates += ',';
+
+				}
+
+				esriCoordinates += '[' + coordinates[i][1] + ',' + coordinates[i][0] + ']';
+
+			}
+
+			esriCoordinates += ']],"spatialReference":{"wkid":4326}}'
+
+			return esriCoordinates;
+
+		}
 
 		function locationListener(marker) {
 

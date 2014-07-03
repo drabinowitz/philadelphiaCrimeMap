@@ -23,7 +23,7 @@ function drawEllipse( latLng1,latLng2,radius,accuracy ){
 			console.log('invalid accuracy value of ' + accuracy + ' accuracy must be an integer value of 3 or greater');
 
 		}*/
-
+	accuracy = 2 * accuracy;
 
 	var coordinates = []
 
@@ -33,17 +33,33 @@ function drawEllipse( latLng1,latLng2,radius,accuracy ){
 
 		coordinates.push([
 
-			latLng1[0] + scale * Math.cos( Math.PI * i / accuracy ),
+			latLng1[0] + scale * Math.cos( theta + Math.PI * i / accuracy ),
 
-			latLng1[1] + scale * Math.sin( Math.PI * i / accuracy ),
-
-			latLng2[0] + scale * Math.cos( Math.PI * i / accuracy ),
-
-			latLng2[1] + scale * Math.sin( Math.PI * i / accuracy )
+			latLng1[1] + scale * Math.sin( theta + Math.PI * i / accuracy )
 
 		]);
 
 	}
+
+	for(var j = 0; j <= accuracy;j++){
+
+		coordinates.push([
+
+			latLng2[0] + scale * Math.cos( theta - Math.PI * j / accuracy ),
+
+			latLng2[1] + scale * Math.sin( theta - Math.PI * j / accuracy )
+
+		]);
+
+	}
+
+	coordinates.push([
+
+		latLng1[0] + scale * Math.cos( theta ),
+
+		latLng1[1] + scale * Math.sin( theta )
+
+	]);
 
 	return coordinates;
 

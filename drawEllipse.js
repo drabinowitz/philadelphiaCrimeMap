@@ -33,9 +33,9 @@ function drawEllipse( latLng1,latLng2,radius,accuracy ){
 
 		coordinates.push([
 
-			latLng1[0] + scale * Math.cos( theta + Math.PI * i / accuracy ),
+			latLng1[0] + scale * Math.cos( theta - Math.PI * i / accuracy + Math.PI / 2 ),
 
-			latLng1[1] + scale * Math.sin( theta + Math.PI * i / accuracy )
+			latLng1[1] + scale * Math.sin( theta - Math.PI * i / accuracy + Math.PI / 2 )
 
 		]);
 
@@ -45,9 +45,9 @@ function drawEllipse( latLng1,latLng2,radius,accuracy ){
 
 		coordinates.push([
 
-			latLng2[0] + scale * Math.cos( theta - Math.PI * j / accuracy ),
+			latLng2[0] + scale * Math.cos( theta + Math.PI * j / accuracy + Math.PI / 2 ),
 
-			latLng2[1] + scale * Math.sin( theta - Math.PI * j / accuracy )
+			latLng2[1] + scale * Math.sin( theta + Math.PI * j / accuracy + Math.PI / 2 )
 
 		]);
 

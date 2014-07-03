@@ -58,7 +58,7 @@ $(document).ready(function(){
     
     	googleMap.setMapBoundaries( googleMap.map.getBounds() );
 
-    	googleMap.setEsriClickEvent( 10,0.002,esriClickRequest );
+    	googleMap.setEsriClickEvent( 16,0.002,esriClickRequest );
 	
 	});
 

@@ -1,3 +1,5 @@
+var gMap;
+
 $(document).ready(function(){
 
 	var zoomLevel = 13;
@@ -61,5 +63,7 @@ $(document).ready(function(){
     	googleMap.setEsriClickEvent( 16,0.002,esriClickRequest );
 	
 	});
+
+	gMap = googleMap.map;
 
 });

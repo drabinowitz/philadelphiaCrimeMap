@@ -1,0 +1,1 @@
+I am creating a Google Map experience for Philadelphia using AJAX with Philadelphia's Open Crime data to create an interactive crime heat map with a better user experience than the existing offering provided by the Philadelphia Police Department.

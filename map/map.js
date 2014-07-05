@@ -1,4 +1,4 @@
-function initialize( mapOptions ) {
+function initialize( mapOptions,myStyle ) {
 
 	/*function fluidZoom( zoomLevel,stepSize,stepSpeed ){
 
@@ -53,6 +53,8 @@ function initialize( mapOptions ) {
 	}
 
 	var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+
+	map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
 
 	return {
 

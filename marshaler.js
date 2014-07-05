@@ -2,7 +2,41 @@ $(document).ready(function(){
 
 	var zoomLevel = 13;
 
+	var myStyle = [
+       {
+         featureType: "administrative",
+         elementType: "labels",
+         stylers: [
+           { visibility: "off" }
+         ]
+       },{
+         featureType: "poi",
+         elementType: "labels",
+         stylers: [
+           { visibility: "off" }
+         ]
+       },{
+         featureType: "water",
+         elementType: "labels",
+         stylers: [
+           { visibility: "off" }
+         ]
+       },{
+         featureType: "road",
+         elementType: "labels",
+         stylers: [
+           { visibility: "off" }
+         ]
+       }
+     ];
+
 	var mapOptions = {
+
+		mapTypeControlOptions: {
+         mapTypeIds: ['mystyle', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
+    	},
+
+    	mapTypeId: 'mystyle',
 
 		center: new google.maps.LatLng(39.9578866,-75.1698302),
 
@@ -10,11 +44,17 @@ $(document).ready(function(){
 
 		minZoom: zoomLevel,
 
-		draggable: true,
+		draggable: false,
 
-		overviewMapControl: false,
+		disableDefaultUI: true,
 
-		panControl: true
+		disableDoubleClickZoom: true,
+
+		noClear: true,
+
+		scrollwheel: false,
+
+		keyboardShortcuts: false
 
 	};
 
@@ -52,7 +92,7 @@ $(document).ready(function(){
 
 	};
 
-	var googleMap = initialize( mapOptions );
+	var googleMap = initialize( mapOptions,myStyle );
 
 	google.maps.event.addListenerOnce(googleMap.map, 'idle', function() {
     

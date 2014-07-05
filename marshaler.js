@@ -110,7 +110,7 @@ $(document).ready(function(){
 			
 			stylers: [
 			
-				{ color: "#AAAAAA" }
+				{ color: "#DDCCCC" }
 			
 			]
 		

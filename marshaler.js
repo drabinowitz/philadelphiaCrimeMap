@@ -3,38 +3,142 @@ $(document).ready(function(){
 	var zoomLevel = 13;
 
 	var myStyle = [
-       {
-         featureType: "administrative",
-         elementType: "labels",
-         stylers: [
-           { visibility: "off" }
-         ]
-       },{
-         featureType: "poi",
-         elementType: "labels",
-         stylers: [
-           { visibility: "off" }
-         ]
-       },{
-         featureType: "water",
-         elementType: "labels",
-         stylers: [
-           { visibility: "off" }
-         ]
-       },{
-         featureType: "road",
-         elementType: "labels",
-         stylers: [
-           { visibility: "off" }
-         ]
-       }
-     ];
+
+		{
+
+			featureType: "administrative",
+
+			elementType: "labels",
+
+			stylers: [
+
+				{ visibility: "off" }
+
+			]
+
+		},
+
+		{
+
+			featureType: "poi",
+
+			elementType: "all",
+			
+			stylers: [
+			
+				{ visibility: "off" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "water",
+			
+			elementType: "geometry",
+			
+			stylers: [
+			
+				{ color: "#DDDDFF" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "landscape",
+			
+			elementType: "all",
+			
+			stylers: [
+			
+				{ visibility: "off" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "road",
+			
+			elementType: "labels",
+			
+			stylers: [
+			
+				{ visibility: "off" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "road.local",
+			
+			elementType: "labels",
+			
+			stylers: [
+			
+				{ visibility: "on" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "road.arterial",
+			
+			elementType: "labels",
+			
+			stylers: [
+			
+				{ visibility: "on" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "road.highway",
+			
+			elementType: "geometry",
+			
+			stylers: [
+			
+				{ color: "#AAAAAA" }
+			
+			]
+		
+		},
+
+		{
+		
+			featureType: "transit",
+			
+			elementType: "all",
+			
+			stylers: [
+			
+				{ visibility: "off" }
+			
+			]
+		
+		}
+
+	];
 
 	var mapOptions = {
 
 		mapTypeControlOptions: {
          mapTypeIds: ['mystyle', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
     	},
+
+    	backgroundColor: '#fff',
 
     	mapTypeId: 'mystyle',
 

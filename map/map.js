@@ -54,7 +54,11 @@ function initialize( mapOptions,myStyle ) {
 
 	var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-	map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
+	if (myStyle){
+
+		map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
+
+	}
 
 	return {
 

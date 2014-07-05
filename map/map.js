@@ -1,29 +1,5 @@
-function initialize( mapOptions,myStyle ) {
-
-	/*function fluidZoom( zoomLevel,stepSize,stepSpeed ){
-
-		var zoomStep = map.getZoom();
-
-		if( zoomStep >= zoomLevel - stepSize ){
-
-			map.setZoom(zoomLevel);
-
-		} else {
-
-			zoomStep += stepSize - ( zoomLevel - zoomStep ) % stepSize;
-
-			map.setZoom(zoomStep);
-
-			setTimeout( function(){
-
-				fluidZoom( zoomLevel,stepSize,stepSpeed );
-
-			}, stepSpeed );
-
-		}
-
-	}*/
-
+function initialize( mapSettings ) {
+/*	
 	function drawPerimeter( lat,lng,accuracy,scale ){
 
 		if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
@@ -50,119 +26,21 @@ function initialize( mapOptions,myStyle ) {
 
 		}
 
+	}*/
+
+	var map = new google.maps.Map(document.getElementById("map-canvas"),mapSettings.mapOptions);
+
+	if (mapSettings.hasOwnProperty('mapStyle')){
+
+		map.mapTypes.set('mystyle', new google.maps.StyledMapType(mapSettings.mapStyle, { name: 'Map Style' }));
+
 	}
 
-	var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
-	if (myStyle){
-
-		map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
-
-	}
+	if (mapSettings.hasOwnProperty('mapCustomOptions'))
 
 	return {
 
-		map: map,
-
-		setMapBoundaries: function( allowedBounds ){
-
-			google.maps.event.addListener(map,'center_changed',function(){   
-
-				if(! allowedBounds.contains(map.getCenter())) {
-
-					var C = map.getCenter();
-
-					var X = C.lng();
-
-					var Y = C.lat(); 
-
-					var AmaxX = allowedBounds.getNorthEast().lng();
-
-					var AmaxY = allowedBounds.getNorthEast().lat();
-
-					var AminX = allowedBounds.getSouthWest().lng();
-
-					var AminY = allowedBounds.getSouthWest().lat();
-
-					if (X < AminX) {X = AminX;}
-
-					if (X > AmaxX) {X = AmaxX;}
-
-					if (Y < AminY) {Y = AminY;}
-
-					if (Y > AmaxY) {Y = AmaxY;}
-
-					map.setCenter(new google.maps.LatLng(Y,X));
-
-				}
-
-			});
-
-		},
-
-		setEsriClickEvent: function( accuracy,scale,esriRequest ) {
-
-			google.maps.event.addListener(map,'click',function(event){
-
-				$('.overlay').show();
-
-				var coordinates = drawPerimeter(event.latLng.lat(),event.latLng.lng(),accuracy,scale);
-
-				var result = esri.getAjaxResponse( esriRequest,coordinates )
-
-				.done(function(result){
-
-					$('.overlay').hide();
-
-					$.each(result.features,function(index,value){
-
-						var newMarker = new google.maps.Marker({
-
-						position: new google.maps.LatLng(value.attributes.POINT_Y,value.attributes.POINT_X),
-
-						map: map,
-
-						title: 'Click to zoom'
-
-						});
-
-					});
-
-					map.panTo( event.latLng );
-
-					map.setZoom( 17 );
-
-					var perimeterCoordinates = [];
-
-					$.each(coordinates,function(index,value){
-
-						perimeterCoordinates.push( new google.maps.LatLng(value[0],value[1]) )
-
-					})
-
-					perimeter = new google.maps.Polygon({
-
-						paths: perimeterCoordinates,
-
-						strokeColor: '#FF0000',
-
-						strokeOpacity: 0.8,
-
-						strokeWeight: 2,
-
-						fillColor: '#FF0000',
-
-						fillOpacity: 0.35
-
-					});
-
-					perimeter.setMap(map);
-
-					debugger;
-
-				});
-
-			});
+		map: map
 
 		}
 

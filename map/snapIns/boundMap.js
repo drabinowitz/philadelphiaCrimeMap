@@ -1,39 +1,45 @@
 $(document).ready(function(){
 
-	var boundMap = ( function( map,allowedBounds ){
+	google.maps.event.addListenerOnce(globals.map,'idle',function(){   
 
-		google.maps.event.addListener(map,'center_changed',function(){   
+		var boundMap = ( function( map,allowedBounds ){
 
-			if(! allowedBounds.contains(map.getCenter())) {
+			debugger;
 
-				var C = map.getCenter();
+			google.maps.event.addListener(map,'center_changed',function(){   
 
-				var X = C.lng();
+				if(! allowedBounds.contains(map.getCenter())) {
 
-				var Y = C.lat(); 
+					var C = map.getCenter();
 
-				var AmaxX = allowedBounds.getNorthEast().lng();
+					var X = C.lng();
 
-				var AmaxY = allowedBounds.getNorthEast().lat();
+					var Y = C.lat(); 
 
-				var AminX = allowedBounds.getSouthWest().lng();
+					var AmaxX = allowedBounds.getNorthEast().lng();
 
-				var AminY = allowedBounds.getSouthWest().lat();
+					var AmaxY = allowedBounds.getNorthEast().lat();
 
-				if (X < AminX) {X = AminX;}
+					var AminX = allowedBounds.getSouthWest().lng();
 
-				if (X > AmaxX) {X = AmaxX;}
+					var AminY = allowedBounds.getSouthWest().lat();
 
-				if (Y < AminY) {Y = AminY;}
+					if (X < AminX) {X = AminX;}
 
-				if (Y > AmaxY) {Y = AmaxY;}
+					if (X > AmaxX) {X = AmaxX;}
 
-				map.setCenter(new google.maps.LatLng(Y,X));
+					if (Y < AminY) {Y = AminY;}
 
-			}
+					if (Y > AmaxY) {Y = AmaxY;}
 
-		});
+					map.setCenter(new google.maps.LatLng(Y,X));
 
-	})( globals.map,globals.map.getBounds() );
+				}
+
+			});
+
+		})( globals.map,globals.map.getBounds() );
+
+	});
 
 });

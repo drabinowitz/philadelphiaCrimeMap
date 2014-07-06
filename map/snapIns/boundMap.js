@@ -4,8 +4,6 @@ $(document).ready(function(){
 
 		var boundMap = ( function( map,allowedBounds ){
 
-			debugger;
-
 			google.maps.event.addListener(map,'center_changed',function(){   
 
 				if(! allowedBounds.contains(map.getCenter())) {

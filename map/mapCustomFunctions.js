@@ -1,4 +1,4 @@
-var mapCustomFunctions = function(map){}
+var mapCustomFunctions = function(map){
 
 	return{
 

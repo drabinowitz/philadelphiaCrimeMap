@@ -42,7 +42,7 @@ function initialize( mapSettings ) {
 
 	if (mapSettings.hasOwnProperty('mapStyle')){
 
-		map.mapTypes.set('mystyle', new google.maps.StyledMapType(mapSettings.mapStyle, { name: 'Map Style' }));
+		map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapSettings.mapStyle, { name: 'Map Style' }));
 
 	}
 

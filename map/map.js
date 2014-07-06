@@ -48,7 +48,7 @@ function initialize( mapSettings ) {
 
 	if (mapSettings.hasOwnProperty('mapCustomOptions')){
 
-		customOptions( mapCustomOptions );
+		customOptions( mapSettings.mapCustomOptions );
 
 	}
 
@@ -56,7 +56,7 @@ function initialize( mapSettings ) {
 
 		map: map,
 
-		customOptions : customOptions( mapCustomOptions )
+		customOptions : function(mapCustomOptions){customOptions( mapCustomOptions )}
 
 		}
 

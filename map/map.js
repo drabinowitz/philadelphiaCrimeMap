@@ -1,65 +1,23 @@
-function initialize( mapSettings ) {
-/*	
-	function drawPerimeter( lat,lng,accuracy,scale ){
+$(document).ready(function(){
 
-		if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
+	var googleMap = (function initialize( mapStyleAndOptions ) {
 
-			var coordinates = []
+		var map = new google.maps.Map(document.getElementById("map-canvas"),mapStyleAndOptions.mapOptions);
 
-			for(var i = 0; i <= accuracy;i++){
+		if (mapStyleAndOptions.hasOwnProperty('mapStyle')){
 
-				coordinates.push([
-
-					lat + scale * Math.cos( 2 * Math.PI * i / accuracy ),
-
-					lng + scale * Math.sin( 2 * Math.PI * i / accuracy )
-
-				]);
-
-			}
-
-			return coordinates;
-
-		} else {
-
-			console.log('invalid accuracy value of ' + accuracy + ' accuracy must be an integer value of 3 or greater');
+			map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapStyleAndOptions.mapStyle, { name: 'Map Style' }));
 
 		}
 
-	}*/
+		return {
 
-	var map = new google.maps.Map(document.getElementById("map-canvas"),mapSettings.mapOptions);
+			map: map
 
-	function customOptions ( mapCustomOptions ){
+		};
 
-		$.each( mapCustomOptions,function(name,value){
+	})( globals.mapStyleAndOptions );
 
-			mapCustomFunctions[ name ]( value );
+	globals.map = googleMap.map;
 
-		});
-
-	};
-
-	if (mapSettings.hasOwnProperty('mapStyle')){
-
-		map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapSettings.mapStyle, { name: 'Map Style' }));
-
-	}
-
-	if (mapSettings.hasOwnProperty('mapCustomOptions')){
-
-		customOptions( mapSettings.mapCustomOptions );
-
-	}
-
-	return {
-
-		map: map,
-
-		customOptions : function(mapCustomOptions){customOptions( mapCustomOptions )}
-
-		}
-
-	};
-
-}
+});

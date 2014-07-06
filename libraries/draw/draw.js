@@ -67,3 +67,31 @@ var draw = {
 	}
 
 };
+
+/*var coordinatesEllipse = drawEllipse( [39.9578866,-75.1698302],[39.9608866,-75.1728302],0.001,8 );
+
+var perimeterCoordinatesEllipse = [];
+
+$.each(coordinatesEllipse,function(index,value){
+
+	perimeterCoordinatesEllipse.push( new google.maps.LatLng(value[0],value[1]) )
+
+})
+
+perimeter = new google.maps.Polygon({
+
+	paths: perimeterCoordinatesEllipse,
+
+	strokeColor: '#FF0000',
+
+	strokeOpacity: 0.8,
+
+	strokeWeight: 2,
+
+	fillColor: '#FF0000',
+
+	fillOpacity: 0.35
+
+});
+
+perimeter.setMap(googleMap.map);*/

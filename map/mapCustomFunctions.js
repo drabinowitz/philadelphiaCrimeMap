@@ -62,15 +62,15 @@ var mapCustomFunctions = function(map){}
 
 		},
 
-		esriClickEvent: function( accuracy,scale,esriRequest ) {
+		esriClickEvent: function( esriClickSettings ) {
 
 			google.maps.event.addListener(map,'click',function(event){
 
 				$('.overlay').show();
 
-				var coordinates = draw.circle(event.latLng.lat(),event.latLng.lng(),accuracy,scale);
+				var coordinates = draw.circle(event.latLng.lat(),event.latLng.lng(),esriClickSettings.accuracy,esriClickSettings.scale);
 
-				var result = esri.getAjaxResponse( esriRequest,coordinates )
+				var result = esri.getAjaxResponse( esriClickSettings.request,coordinates )
 
 				.done(function(result){
 

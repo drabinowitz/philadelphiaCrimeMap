@@ -40,7 +40,15 @@ function initialize( mapSettings ) {
 
 	return {
 
-		map: map
+		map: map,
+
+		customOptions : function( mapCustomOptions ){
+
+			$.each( mapCustomOptions,function(name,value){
+
+				mapCustomFunctions[ name ]( value );
+
+			});
 
 		}
 

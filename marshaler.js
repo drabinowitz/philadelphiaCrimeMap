@@ -2,6 +2,60 @@ $(document).ready(function(){
 
 	var zoomLevel = 13;
 
+	/*var esriClickOptions = {
+
+		geometry: undefined,
+
+		geometryType: "esriGeometryPolygon",
+
+		spatialRel: "esriSpatialRelContains",
+
+		where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
+
+		outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
+
+		inSR: 4326,
+
+		outSR: 4326,
+
+		f: "pjson",
+
+		pretty: true
+
+	};
+
+	var esriClickRequest = {
+				
+		url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query",
+		
+		data: {
+
+			geometry: undefined,
+
+			geometryType: "esriGeometryPolygon",
+
+			spatialRel: "esriSpatialRelContains",
+
+			where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
+
+			outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
+
+			inSR: 4326,
+
+			outSR: 4326,
+
+			f: "pjson",
+
+			pretty: true
+
+		},
+		
+		dataType: "jsonp",
+		
+		type: "GET",
+
+	};*/
+
 	var mapSettings = {
 
 		mapStyle : [
@@ -144,7 +198,7 @@ $(document).ready(function(){
 
 	    	backgroundColor: '#fff',
 
-	    	mapTypeId: 'mystyle',
+	    	mapTypeId: 'mapStyle',
 
 			center: new google.maps.LatLng(39.9578866,-75.1698302),
 
@@ -164,59 +218,67 @@ $(document).ready(function(){
 
 			keyboardShortcuts: false
 
-		},
-
-		mapCustomOptions : {
-
-			esriClickEvent
-
 		}
-
-	};
-
-	var esriClickOptions = {
-
-		geometry: undefined,
-
-		geometryType: "esriGeometryPolygon",
-
-		spatialRel: "esriSpatialRelContains",
-
-		where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
-
-		outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
-
-		inSR: 4326,
-
-		outSR: 4326,
-
-		f: "pjson",
-
-		pretty: true
-
-	};
-
-	var esriClickRequest = {
-				
-		url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query",
-		
-		data: esriClickOptions,
-		
-		dataType: "jsonp",
-		
-		type: "GET",
 
 	};
 
 	var googleMap = initialize( mapSettings );
 
-	google.maps.event.addListenerOnce(googleMap.map, 'idle', function() {
+	var mapCustomOptions : {
+
+		esriClickEvent : {
+
+			accuracy : 16,
+
+			scale : 0.002,
+
+			request : {
+			
+				url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query",
+				
+				data: {
+
+					geometry: undefined,
+
+					geometryType: "esriGeometryPolygon",
+
+					spatialRel: "esriSpatialRelContains",
+
+					where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
+
+					outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
+
+					inSR: 4326,
+
+					outSR: 4326,
+
+					f: "pjson",
+
+					pretty: true
+
+				},
+				
+				dataType: "jsonp",
+				
+				type: "GET"
+
+			}
+
+		},
+
+		mapBoundaries : googleMap.map.getBounds();
+
+	};
+
+	googleMap.customOptions( mapCustomOptions );
+
+/*	google.maps.event.addListenerOnce(googleMap.map, 'idle', function() {
     
     	googleMap.setMapBoundaries( googleMap.map.getBounds() );
 
     	googleMap.setEsriClickEvent( 16,0.002,esriClickRequest );
 	
-	});
+	});*/
 
 	var coordinatesEllipse = drawEllipse( [39.9578866,-75.1698302],[39.9608866,-75.1728302],0.001,8 );
 

@@ -30,25 +30,33 @@ function initialize( mapSettings ) {
 
 	var map = new google.maps.Map(document.getElementById("map-canvas"),mapSettings.mapOptions);
 
+	function customOptions ( mapCustomOptions ){
+
+		$.each( mapCustomOptions,function(name,value){
+
+			mapCustomFunctions[ name ]( value );
+
+		});
+
+	};
+
 	if (mapSettings.hasOwnProperty('mapStyle')){
 
 		map.mapTypes.set('mystyle', new google.maps.StyledMapType(mapSettings.mapStyle, { name: 'Map Style' }));
 
 	}
 
-	if (mapSettings.hasOwnProperty('mapCustomOptions'))
+	if (mapSettings.hasOwnProperty('mapCustomOptions')){
+
+		customOptions( mapCustomOptions );
+
+	}
 
 	return {
 
 		map: map,
 
-		customOptions : function( mapCustomOptions ){
-
-			$.each( mapCustomOptions,function(name,value){
-
-				mapCustomFunctions[ name ]( value );
-
-			});
+		customOptions : customOptions( mapCustomOptions )
 
 		}
 

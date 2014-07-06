@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var boundMap = (function( map,allowedBounds ){
+	var boundMap = ( function( map,allowedBounds ){
 
 		google.maps.event.addListener(map,'center_changed',function(){   
 
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 			}
 
-		}
+		});
 
 	})( globals.map,globals.map.getBounds() );
 

@@ -148,9 +148,9 @@ var globals = {
 
 			center: new google.maps.LatLng(39.9578866,-75.1698302),
 
-			zoom: zoomLevel,
+			zoom: 13,
 
-			minZoom: zoomLevel,
+			minZoom: 13,
 
 			draggable: false,
 

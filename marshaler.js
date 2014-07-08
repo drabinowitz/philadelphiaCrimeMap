@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var zoomLevel = 13;
+	var zoomLevel = 14;
 
 	var myStyle = [
 

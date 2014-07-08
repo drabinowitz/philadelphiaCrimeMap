@@ -8,8 +8,6 @@ $(document).ready(function(){
 
 			$('.overlay').show();
 
-			debugger;
-
 			var result = esri.getAjaxResponse( request,coordinates )
 
 			.done(function(result){
@@ -36,6 +34,8 @@ $(document).ready(function(){
 
 		    	});
 
+		    	globals.heatmapData = heatmapData;
+
 		    	heatmap.setDataSet({ max: heatmapDataMax, data: heatmapData });
 
 		    });
@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 		{
 
-			url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents_Last30/MapServer/0/query",
+			url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query",
 
 			data: {
 
@@ -78,19 +78,7 @@ $(document).ready(function(){
 
 		},
 
-		[
-
-			[39.91716245326531, -75.27402865581053],
-
-			[39.97965090420449, -75.27402865581053],
-
-			[39.97965090420449, -75.06563174418943],
-
-			[39.91716245326531, -75.06563174418943],
-
-			[39.91716245326531, -75.27402865581053]
-
-		],
+		draw.rectangle([39.91716245326531,-75.27402865581053],[39.97965090420449,-75.06563174418943]),
 
 		{
 		

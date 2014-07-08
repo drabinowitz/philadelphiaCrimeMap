@@ -1,10 +1,50 @@
 var draw = {
 
+	square : function( lat,lng,scale ){
+
+		var coordinates = [];
+
+		for(var i = 0; i <= 4;i++){
+
+			coordinates.push([
+
+				lat + scale * Math.cos( 2 * Math.PI * i / 4 + Math.PI / 4 ),
+
+				lng + scale * Math.sin( 2 * Math.PI * i / 4 + Math.PI / 4 )
+
+			]);
+
+		}
+
+		return coordinates;
+
+	},
+
+	rectangle : function( latLng1,latLng2 ){
+
+		var coordinates = [
+
+			latLng1,
+
+			[latLng1[0],latLng2[1]],
+
+			latLng2,
+
+			[latLng2[0],latLng1[1]],
+
+			latLng1
+
+		];
+
+		return coordinates;
+
+	},
+
 	circle : function ( lat,lng,accuracy,scale ){
 
 		if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
 
-			var coordinates = []
+			var coordinates = [];
 
 			for(var i = 0; i <= accuracy;i++){
 

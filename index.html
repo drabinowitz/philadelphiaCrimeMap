@@ -3,13 +3,22 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-      <!--reset bootstrap Google Maps and jQuery-->
 
-    <link rel="stylesheet" href="reset.css">
+    <!--reset css styles-->
+
+    <link rel="stylesheet" href="map/css/reset.css">
+
+
+
+    <!--load boostrap.css-->
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+
+
+    <!--load jquery and boostrap.js-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -17,10 +26,15 @@
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq9uvAd3KJMszF-1EAVvikMJd9NmcTAYs"></script>
 
-      <!--project references-->
-    <link rel="stylesheet" href="main.css">
 
-    <script type="text/javascript" src="globalConfig.js"></script>
+
+    <!--load the config file for this project-->
+
+    <script type="text/javascript" src="configFiles/globalConfig.js"></script>
+
+
+
+    <!--load necessary libraries for map and snapIns-->
     
     <script type="text/javascript" src="libraries/draw/draw.js"></script>
 
@@ -30,15 +44,33 @@
 
     <script type="text/javascript" src="libraries/heatmapJs/heatmap-gmaps.js"></script>
 
+
+
+    <!--load the map and associated css which will publish its object to the global config-->
+
     <script type="text/javascript" src="map/map.js"></script>
+
+    <link rel="stylesheet" href="map/css/map.css">
+
+
+
+    <!--load map snapIns which will access globally published map-->
 
     <script type="text/javascript" src="map/snapIns/enableEsriClickEvent.js"></script>    
 
     <script type="text/javascript" src="map/snapIns/buildHeatCrimeOverlay.js"></script>
 
+
+
+    <!--overlay css-->
+
+    <link rel="stylesheet" href="loadingOverlay/css/overlay.css">
+
+
+
   </head>
   <body>
-    <div class="overlay"><img src="ajax-loader.gif" alt=""></div>
+    <div class="overlay"><img src="loadingOverlay/ajaxLoader.gif" alt=""></div>
     <div id="map-canvas"/>
   </body>
 </html>

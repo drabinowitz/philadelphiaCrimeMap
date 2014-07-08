@@ -84,6 +84,8 @@ $(document).ready(function(){
 
 				inSR: 4326,
 
+				returnGeometry: false,
+
 				outSR: 4326,
 
 				f: "pjson",

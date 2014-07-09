@@ -1,5 +1,45 @@
 var draw = {
 
+	subRectangle : function( coordinates,numberOfSections ){
+
+		var coordinateSections = [];
+
+		var divider = function(latLng,section){
+
+			return coordinates[0][latLng] + section * ( coordinates[2][latLng] - coordinates[0][latLng] ) / numberOfSections;
+
+		};
+
+		for(var i = 0; i < numberOfSections;i++ ){
+
+			var subCoordinates = draw.rectangle(
+
+				[
+
+					coordinates[0][0],
+
+					divider( 1, i )
+
+				],
+
+				[
+
+					coordinates[2][0],
+
+					divider( 1, i + 1 )
+
+				]
+
+			);
+
+			coordinateSections.push( subCoordinates );
+
+		}
+
+		return coordinateSections;
+
+	},
+
 	square : function( lat,lng,scale ){
 
 		var coordinates = [];

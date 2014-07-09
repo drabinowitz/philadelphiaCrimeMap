@@ -4,35 +4,49 @@ $(document).ready(function(){
 
 		var heatmap = new HeatmapOverlay( map,heatmapConfig );
 
+		var coordinateSections = draw.subRectangle( coordinates,2 );
+
 		google.maps.event.addListenerOnce(map, "idle", function(){
 
 			$('.overlay').show();
 
-			var result = esri.getAjaxResponse( request,coordinates )
+			var result = [];
 
-			.done(function(result){
+			$.when(
+
+				esri.getAjaxResponse( request,coordinateSections[0] ).done(function(data){result.push(data)}),
+
+				esri.getAjaxResponse( request,coordinateSections[1] ).done(function(data){result.push(data)})
+
+			)
+
+			.then(function(){
 
 				$('.overlay').hide();
 
 				var heatmapData = [];
 
-				$.each(result.features,function(index,value){
+				$.each(result,function(index,shapeData){
 
-		    		heatmapData.push(
+					$.each(shapeData.features,function(index,value){
 
-		    			{
+			    		heatmapData.push(
 
-		    				lat: value.attributes.POINT_Y, 
+			    			{
 
-		    				lng: value.attributes.POINT_X,
+			    				lat: value.geometry.y, 
 
-		    				count: 1
+			    				lng: value.geometry.x,
 
-		    			}
+			    				count: 1
 
-		    		);
+			    			}
 
-		    	});
+			    		);
+
+			    	});
+
+				});
 
 		    	globals.heatmapData = heatmapData;
 
@@ -58,11 +72,9 @@ $(document).ready(function(){
 
 				spatialRel: "esriSpatialRelContains",
 
-				outFields: "POINT_X,POINT_Y",
-
 				inSR: 4326,
 
-				returnGeometry: false,
+				returnGeometry: true,
 
 				outSR: 4326,
 
@@ -90,7 +102,7 @@ $(document).ready(function(){
 		
 		},
 
-		3
+		7
 
 	);
 

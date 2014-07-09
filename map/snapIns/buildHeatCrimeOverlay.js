@@ -78,6 +78,8 @@ $(document).ready(function(){
 
 				spatialRel: "esriSpatialRelContains",
 
+				where: "DC_DIST=3 OR DC_DIST=6 OR DC_DIST=9 OR DC_DIST=16 OR DC_DIST=17 OR DC_DIST=18 OR DC_DIST=19 OR DC_DIST=26",
+
 				inSR: 4326,
 
 				returnGeometry: true,

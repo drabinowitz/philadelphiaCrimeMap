@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 		var heatmap = new HeatmapOverlay( map,heatmapConfig );
 
-		var coordinateSections = draw.subRectangle( coordinates,2 );
+		var coordinateSections = draw.subRectangle( coordinates,4 );
 
 		google.maps.event.addListenerOnce(map, "idle", function(){
 
@@ -16,7 +16,11 @@ $(document).ready(function(){
 
 				esri.getAjaxResponse( request,coordinateSections[0] ).done(function(data){result.push(data)}),
 
-				esri.getAjaxResponse( request,coordinateSections[1] ).done(function(data){result.push(data)})
+				esri.getAjaxResponse( request,coordinateSections[1] ).done(function(data){result.push(data)}),
+
+				esri.getAjaxResponse( request,coordinateSections[2] ).done(function(data){result.push(data)}),
+
+				esri.getAjaxResponse( request,coordinateSections[3] ).done(function(data){result.push(data)})
 
 			)
 
@@ -51,6 +55,8 @@ $(document).ready(function(){
 		    	globals.heatmapData = heatmapData;
 
 		    	heatmap.setDataSet({ max: heatmapDataMax, data: heatmapData });
+
+		    	debugger;
 
 		    });
 
@@ -90,7 +96,7 @@ $(document).ready(function(){
 
 		},
 
-		draw.rectangle([39.93716245326531,-75.25002865581053],[39.97965090420449,-75.12163174418943]),
+		draw.rectangle([39.91716245326531,-75.27002865581053],[39.99965090420449,-75.10163174418943]),
 
 		{
 		

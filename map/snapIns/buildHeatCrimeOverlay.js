@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 		{
 
-			url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents/MapServer/0/query",
+			url: "http://gis.phila.gov/ArcGIS/rest/services/PhilaGov/Police_Incidents_Last30/MapServer/0/query",
 
 			data: {
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
 		},
 
-		draw.rectangle([39.91716245326531,-75.27402865581053],[39.97965090420449,-75.06563174418943]),
+		draw.rectangle([39.93716245326531,-75.25002865581053],[39.97965090420449,-75.12163174418943]),
 
 		{
 		

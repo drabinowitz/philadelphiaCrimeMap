@@ -1,0 +1,28 @@
+.page-header {
+	margin: 0;
+	padding: 5px 0 0 10px;
+	position: fixed;
+	box-shadow: 0 .2em .4em -.2em black;
+	top: 0;
+	height: 50px;
+	left: 0;
+	right: 0;
+	z-index: 200;
+	background-color: white;
+}
+
+.page-header *{
+	display: inline-block;
+}
+
+.name {
+	margin-top: 0;
+}
+
+.page-header input{
+	float: right;
+	margin: 10px 25px 0 0;
+	background: none;
+	border: none;
+	outline: blue auto 5px;
+}

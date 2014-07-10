@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	var enableEsriClickEvent = (function( map,request,accuracy,scale ) {
 
+		globals.mapMarkers = [];
+
 		google.maps.event.addListener(map,'click',function(event){
 
 			$('.overlay').show();
@@ -18,13 +20,15 @@ $(document).ready(function(){
 
 					var newMarker = new google.maps.Marker({
 
-						position: new google.maps.LatLng(value.attributes.POINT_Y,value.attributes.POINT_X),
+						position: new google.maps.LatLng(value.geometry.y,value.geometry.x),
 
 						map: map,
 
 						title: 'Click to zoom'
 
 					});
+
+					globals.mapMarkers.push(newMarker);
 
 				});
 
@@ -44,15 +48,15 @@ $(document).ready(function(){
 
 					paths: perimeterCoordinates,
 
-					strokeColor: '#FF0000',
+					strokeColor: '#222222',
 
-					strokeOpacity: 0.8,
+					strokeOpacity: 0.3,
 
 					strokeWeight: 2,
 
-					fillColor: '#FF0000',
+					fillColor: '#222222',
 
-					fillOpacity: 0.35
+					fillOpacity: 0.1
 
 				});
 
@@ -78,13 +82,11 @@ $(document).ready(function(){
 
 				spatialRel: "esriSpatialRelContains",
 
-				where: "DISPATCH_DATE>'" + (new Date().getFullYear()-1).toString() + "-07-01'",
+				where: new Date().getMonth() < 6 ? "DISPATCH_DATE>'" + (new Date().getFullYear()-1) + "-" + (12 + new Date().getMonth() - 5) + "-01'" : "DISPATCH_DATE>'" + (new Date().getFullYear()) + "-0" + (new Date().getMonth() - 5) + "-01'" ,
 
-				outFields: "UCR_GENERAL,HOUR,POINT_X,POINT_Y",
+				outFields: "UCR_GENERAL,HOUR",
 
 				inSR: 4326,
-
-				returnGeometry: false,
 
 				outSR: 4326,
 
@@ -100,9 +102,9 @@ $(document).ready(function(){
 
 		},
 
-		16,
+		32,
 
-		0.002
+		0.004
 
 	);
 

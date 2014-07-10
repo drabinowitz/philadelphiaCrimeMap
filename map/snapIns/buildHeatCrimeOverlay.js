@@ -56,8 +56,6 @@ $(document).ready(function(){
 
 		    	heatmap.setDataSet({ max: heatmapDataMax, data: heatmapData });
 
-		    	debugger;
-
 		    });
 
 		});
@@ -106,11 +104,11 @@ $(document).ready(function(){
 
 		    visible : true,
 
-		    opacity : 60
+		    opacity : 40
 		
 		},
 
-		7
+		5
 
 	);
 

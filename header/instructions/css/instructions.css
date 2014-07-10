@@ -1,0 +1,17 @@
+.instructionBody{
+	position: fixed;
+	right: 0;
+	top: 0;
+	overflow: auto;
+	width: 300px;
+	border: 1px solid #E2E2E2;
+	box-shadow: 0 0 .4em -.2em black;
+	z-index: 200;
+	background: white;
+	text-align: center;
+	padding-top: 70px;
+	padding-bottom: 50px;
+}
+.instructionBody p{
+	margin: 10px 20px;
+}

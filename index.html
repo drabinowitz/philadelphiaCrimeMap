@@ -10,6 +10,12 @@
 
 
 
+    <!--prefix-free javascript css styles-->
+
+    <link rel="stylesheet" href="libraries/prefixFree/prefixfree.min.js">    
+
+
+
     <!--load boostrap.css-->
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -68,9 +74,60 @@
 
 
 
+    <!--header css-->
+
+    <link rel="stylesheet" href="header/css/header.css">
+
+
+
+    <!--overlay button css and js-->
+
+    <link rel="stylesheet" href="header/mapOverlayButton/css/mapOverlayButton.css">
+
+    <script type="text/javascript" src="header/mapOverlayButton/mapOverlayButton.js"></script>
+
+
+
+    <!--instructions css and js-->
+
+    <link rel="stylesheet" href="header/instructions/css/instructions.css">
+
+    <script type="text/javascript" src="header/instructions/instructions.js"></script>
+
   </head>
   <body>
+
     <div class="overlay"><img src="loadingOverlay/ajaxLoader.gif" alt=""></div>
+
+    <div class="instructionBody">
+
+      <h2>Instructions</h2>
+
+      <p>
+      This map shows a heat map of the crimes reported in districts 3, 6, 9, 16, 17, 18, 19, and 26 over the last month.
+
+      Click anywhere on the map to zoom in on that portion and show the crimes committed there over the last 6 months.
+
+      After zooming in click on the "Overlay View" button above to return to the original view.
+
+      NOTE: this will clear the markers
+
+      When you are zoomed in if you would like to see additional crimes over the last 6 months click on the map again
+      </p>
+
+    </div>
+
+    <header class="page-header">
+
+      <h1 class="name">Philadelphia Crime Heat Map</h1>
+
+      <input type="button" value="Instructions" class="instructions">
+
+      <input type="button" value="Overlay View" class="mapOverlayButton">
+
+    </header>
+
     <div id="map-canvas"/>
+
   </body>
 </html>

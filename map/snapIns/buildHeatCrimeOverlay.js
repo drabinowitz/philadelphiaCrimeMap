@@ -56,7 +56,14 @@ $(document).ready(function(){
 
 		    	heatmap.setDataSet({ max: heatmapDataMax, data: heatmapData });
 
-		    });
+		    },
+
+		    function(){
+
+				alert("the Query failed.  This suggests a possible issue with our internet connection or with the data source.  Please check your connection and refresh the page");
+
+			});
+
 
 		});
 

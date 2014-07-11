@@ -44,19 +44,15 @@ $(document).ready(function(){
 
 				})
 
-				perimeter = new google.maps.Polygon({
+				perimeter = new google.maps.Polyline({
 
-					paths: perimeterCoordinates,
+					path: perimeterCoordinates,
 
 					strokeColor: '#222222',
 
 					strokeOpacity: 0.3,
 
-					strokeWeight: 2,
-
-					fillColor: '#222222',
-
-					fillOpacity: 0.1
+					strokeWeight: 2
 
 				});
 

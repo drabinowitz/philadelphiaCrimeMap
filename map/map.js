@@ -1,171 +1,23 @@
-function initialize( mapOptions,myStyle ) {
+$(document).ready(function(){
 
-	/*function fluidZoom( zoomLevel,stepSize,stepSpeed ){
+	var googleMap = (function initialize( mapStyleAndOptions ) {
 
-		var zoomStep = map.getZoom();
+		var map = new google.maps.Map(document.getElementById("map-canvas"),mapStyleAndOptions.mapOptions);
 
-		if( zoomStep >= zoomLevel - stepSize ){
+		if (mapStyleAndOptions.hasOwnProperty('mapStyle')){
 
-			map.setZoom(zoomLevel);
-
-		} else {
-
-			zoomStep += stepSize - ( zoomLevel - zoomStep ) % stepSize;
-
-			map.setZoom(zoomStep);
-
-			setTimeout( function(){
-
-				fluidZoom( zoomLevel,stepSize,stepSpeed );
-
-			}, stepSpeed );
+			map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapStyleAndOptions.mapStyle, { name: 'Map Style' }));
 
 		}
 
-	}*/
+		return {
 
-	function drawPerimeter( lat,lng,accuracy,scale ){
+			map: map
 
-		if (accuracy >= 3 && Math.floor(accuracy) == accuracy){
+		};
 
-			var coordinates = []
+	})( globals.mapStyleAndOptions );
 
-			for(var i = 0; i <= accuracy;i++){
+	globals.map = googleMap.map;
 
-				coordinates.push([
-
-					lat + scale * Math.cos( 2 * Math.PI * i / accuracy ),
-
-					lng + scale * Math.sin( 2 * Math.PI * i / accuracy )
-
-				]);
-
-			}
-
-			return coordinates;
-
-		} else {
-
-			console.log('invalid accuracy value of ' + accuracy + ' accuracy must be an integer value of 3 or greater');
-
-		}
-
-	}
-
-	var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
-	if (myStyle){
-
-		map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
-
-	}
-
-	return {
-
-		map: map,
-
-		setMapBoundaries: function( allowedBounds ){
-
-			google.maps.event.addListener(map,'center_changed',function(){   
-
-				if(! allowedBounds.contains(map.getCenter())) {
-
-					var C = map.getCenter();
-
-					var X = C.lng();
-
-					var Y = C.lat(); 
-
-					var AmaxX = allowedBounds.getNorthEast().lng();
-
-					var AmaxY = allowedBounds.getNorthEast().lat();
-
-					var AminX = allowedBounds.getSouthWest().lng();
-
-					var AminY = allowedBounds.getSouthWest().lat();
-
-					if (X < AminX) {X = AminX;}
-
-					if (X > AmaxX) {X = AmaxX;}
-
-					if (Y < AminY) {Y = AminY;}
-
-					if (Y > AmaxY) {Y = AmaxY;}
-
-					map.setCenter(new google.maps.LatLng(Y,X));
-
-				}
-
-			});
-
-		},
-
-		setEsriClickEvent: function( accuracy,scale,esriRequest ) {
-
-			google.maps.event.addListener(map,'click',function(event){
-
-				$('.overlay').show();
-
-				var coordinates = drawPerimeter(event.latLng.lat(),event.latLng.lng(),accuracy,scale);
-
-				var result = esri.getAjaxResponse( esriRequest,coordinates )
-
-				.done(function(result){
-
-					$('.overlay').hide();
-
-					$.each(result.features,function(index,value){
-
-						var newMarker = new google.maps.Marker({
-
-						position: new google.maps.LatLng(value.attributes.POINT_Y,value.attributes.POINT_X),
-
-						map: map,
-
-						title: 'Click to zoom'
-
-						});
-
-					});
-
-					map.panTo( event.latLng );
-
-					map.setZoom( 17 );
-
-					var perimeterCoordinates = [];
-
-					$.each(coordinates,function(index,value){
-
-						perimeterCoordinates.push( new google.maps.LatLng(value[0],value[1]) )
-
-					})
-
-					perimeter = new google.maps.Polygon({
-
-						paths: perimeterCoordinates,
-
-						strokeColor: '#FF0000',
-
-						strokeOpacity: 0.8,
-
-						strokeWeight: 2,
-
-						fillColor: '#FF0000',
-
-						fillOpacity: 0.35
-
-					});
-
-					perimeter.setMap(map);
-
-					debugger;
-
-				});
-
-			});
-
-		}
-
-	};
-
-}
+});
